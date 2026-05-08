@@ -6,9 +6,9 @@ const countries = [
     { code: '222', name: 'Mauritanie', flag: 'https://flagcdn.com/mr.svg', len: 8, networks: ['2', '3', '4'], gender: 'la' }
 ];
 const phoneInput = document.getElementById('phone');
-const cuteStatus = document.getElementById('cuteStatus');
+const statusDiv = document.getElementById('Status');
 const flagInputImg = document.getElementById('flagInputImg');
-const flagInputIcon = document.querySelector('.flag-input-icon i');
+const flagInputIcon = document.querySelector('.flag-input-icon .icon-text');
 
 phoneInput.addEventListener('input', (e) => {
     let val = e.target.value;
@@ -32,12 +32,12 @@ phoneInput.addEventListener('input', (e) => {
     }
 });
 
-document.getElementById('cuteAuthForm').addEventListener('submit', function(e) {
+document.getElementById('AuthForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const val = phoneInput.value.trim();
     
     if (!val.startsWith('+') && !val.startsWith('00')) {
-        updateCuteStatus('error', 'fa-circle-xmark', 'Le numéro doit commencer par "+" ou "00".');
+        updateCuteStatus('error', '❌', 'Le numéro doit commencer par "+" ou "00".');
         return;
     }
 
@@ -45,7 +45,7 @@ document.getElementById('cuteAuthForm').addEventListener('submit', function(e) {
     const country = countries.find(c => dialCodeFull.startsWith(c.code));
 
     if (!country) {
-        updateCuteStatus('error', 'fa-ban', 'Indicatif non autorisé (Maghreb uniquement)');
+        updateCuteStatus('error', '🚫', 'Indicatif non autorisé (Maghreb uniquement)');
         return;
     }
 
@@ -59,25 +59,25 @@ document.getElementById('cuteAuthForm').addEventListener('submit', function(e) {
             if (country.gender === "la") prep = "à la";
             if (country.gender === "l'") prep = "à l'";
 
-            updateCuteStatus('error', 'fa-phone-slash', 
+            updateCuteStatus('error', '🛑', 
                 `L'indicatif correspond ${prep} ${country.name}, mais cet opérateur n'est pas reconnu.`);
             return;
         }
     }
     if (count !== country.len) {
-        updateCuteStatus('error', 'fa-triangle-exclamation', 
+        updateCuteStatus('error', '⚠️', 
             `Format ${country.name} invalide.<br>Attendu: ${country.len} chiffres.`, count);
     } else {
-        updateCuteStatus('success', 'fa-circle-check', `Succès ! Numéro ${country.name} valide.`);
+        updateCuteStatus('success', '✅', `Succès ! Numéro ${country.name} valide.`);
     }
 });
 
 function updateCuteStatus(type, icon, message, count = null) {
-    cuteStatus.className = `cute-status ${type}`;
-    cuteStatus.innerHTML = `
-        <i class="fa-solid ${icon}"></i> 
+    statusDiv.className = `status1 ${type}`;
+    statusDiv.innerHTML = `
+        <span class="status-icon">${icon}</span>
         <div>${message}</div>
         ${count !== null ? `<span class="badge-count">Saisi: ${count}</span>` : ''}
     `;
-    cuteStatus.style.display = 'flex';
+    statusDiv.style.display = 'flex';
 }

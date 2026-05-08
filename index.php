@@ -1,7 +1,7 @@
 <?php
-header('Content-Type: application/json');
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    header('Content-Type: application/json');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input = json_decode(file_get_contents('php://input'), true);
     $phone = $_POST['phone'] ?? $input['phone'] ?? '';
     $phone = preg_replace('/[^0-9+]/', '', $phone);
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
     }
 } else {
-    http_response_code(405);
-    echo json_encode(["status" => "error", "message" => "Méthode non autorisée"]);
+    header('Content-Type: text/html; charset=UTF-8');
+    readfile(__DIR__ . '/index.html');
 }
 ?>

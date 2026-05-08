@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validation Maghreb Cute & Stricte</title>
+    <title>Validation Maghreb</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
    </head>
 <body>
-<div class="cute-card">
+<div class="card">
     <div class="header">
         <h2>Validation des numéros du Maghreb</h2>
         <p>Validation de l’indicatif et du format du numéro</p>
     </div>
-    <form id="cuteAuthForm">
+   <form id="AuthForm" method="POST" action="index.php">
         <div class="input-wrapper">
             <div id="flagInputBox" class="flag-input-icon">
-                <i class="fa-solid fa-earth-africa"></i>
+                <span class="icon-text">🌐</span>
                 <img id="flagInputImg" src="" alt="">
             </div>
             <input type="text" id="phone" placeholder="+222 44 00 00 00" required spellcheck="false">
         </div>
-        <button type="submit" class="btn-cute">
+        <button type="submit" class="btn">
             <span>Vérifier le numéro</span>
-            <i class="fa-solid fa-shield-check"></i>
+           
         </button>
     </form>
-    <div id="cuteStatus" class="cute-status"></div>
+    <div id="Status" class="status1"></div>
 </div>
 <script src="script.js"></script>
 </body>
